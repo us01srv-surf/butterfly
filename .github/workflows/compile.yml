@@ -34,4 +34,11 @@ jobs:
         make SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560
         make clean SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560 && make PLATFORM=BOARD_MDK_DONGLE SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560 
         make clean SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560 && make PLATFORM=BOARD_MDK_CONNECTKIT SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560 
+        make clean SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560 && make PLATFORM=BOARD_NICEFNANO SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560
+        make clean SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560 && make dist PLATFORM=BOARD_NICEFNANO SDK_ROOT=$(pwd)/.sdk/nRF5_SDK_17.1.0_ddde560
+    - name: Upload nice!nano firmware
+      uses: actions/upload-artifact@v4
+      with:
+        name: butterfly-nicenano-uf2
+        path: dist/butterfly-nicenano-fwupgrade.uf2
 
