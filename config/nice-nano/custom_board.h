@@ -65,6 +65,12 @@ extern "C" {
 // No user button on nice!nano (only reset).
 #define BUTTONS_NUMBER 0
 
+#define BUTTONS_ACTIVE_STATE 0
+
+#define BUTTONS_LIST { }
+
+#define BSP_BUTTON_0   0
+
 #define RX_PIN_NUMBER  19
 #define TX_PIN_NUMBER  20
 #define CTS_PIN_NUMBER 7
