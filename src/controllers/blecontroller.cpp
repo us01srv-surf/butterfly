@@ -2064,7 +2064,7 @@ void BLEController::sendExistingConnectionReport(uint32_t accessAddress, uint32_
     } else {
         chanMap = new whad::ble::ChannelMap();
     }
-    whad::NanoPbMsg *notification = new whad::ble::Synchronized(accessAddress, crcInit, hopInterval, hopIncrement, *chanMap);
+    whad::NanoPbMsg *notification = new whad::ble::Synchronized(accessAddress, crcInit, hopInterval, hopIncrement, *chanMap, whad::ble::Phy::LE1Mbit);
 
     /* Add notification to our message queue. */
 	Core::instance->pushMessageToQueue(notification);
@@ -2083,7 +2083,7 @@ void BLEController::sendConnectionReport(ConnectionStatus status) {
             /* Craft a synchronization notification. */
             notification = new whad::ble::Synchronized(
                 this->accessAddress, this->crcInit, this->hopInterval, this->hopIncrement,
-                whad::ble::ChannelMap(this->channelMap)
+                whad::ble::ChannelMap(this->channelMap), whad::ble::Phy::LE1Mbit
             );
         }
         break;
@@ -2227,7 +2227,7 @@ void BLEController::sendConnectedReport() {
     );
 
     /* Craft a connected notification, enqueue and free wrapper. */
-    whad::NanoPbMsg *notification = new whad::ble::Connected(0, responderAddr, initiatorAddr);
+    whad::NanoPbMsg *notification = new whad::ble::Connected(0, responderAddr, initiatorAddr, whad::ble::Phy::LE1Mbit);
 	Core::instance->pushMessageToQueue(notification);
     delete notification;
 }
@@ -2266,7 +2266,8 @@ void BLEController::sendSlaveConnectedReport() {
     whad::NanoPbMsg *notification = new whad::ble::Connected(
         0,              /* Connection handle */
         responderAddr,  /* Responder BD address */
-        initiatorAddr   /* Initiator BD address */
+        initiatorAddr,  /* Initiator BD address */
+        whad::ble::Phy::LE1Mbit
     );
 
     /* Add notification to our message queue. */
